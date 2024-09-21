@@ -38,41 +38,56 @@ You can find all the projects below:
     brew install kubevpn
     brew install argocd
     ```
-2. Start minikube
+2. Pull all the projects
     ```shell
-    minikube start
-    ```
-3. Make a directory to store all the projects
-    ```shell
+   {
     mkdir -p ./RabbitGather
     cd ./RabbitGather
     git clone -b minikube https://github.com/meowalien/homepage-cluster-config.git
     git clone -b minikube https://github.com/meowalien/homapage-i18n.git
     git clone -b minikube https://github.com/meowalien/homepage.git
-    git clone -b main https://github.com/meowalien/homepage-authorization.git
+   }
     ```
-4. Start a cluster and make a vpn tunnel into the cluster
+3. Start a cluster and make a vpn tunnel into the cluster
     >This step may require you to input your password, you may see a prompt asking for your password like this:
     ![img.png](img.png)
     ```shell
+    {
     cd ./homepage-cluster-config
-   ./start.sh
+    ./start.sh
+    }
     ```
-5. Deploy needed dependencies
+4. Deploy needed dependencies
     ```shell
     ./deploy_dependencies.sh
     ```
-6. Build and push the images to the local registry in minikube
+5. Build and push the images to the local registry in minikube
     ```shell
+    {
     cd ../homapage-i18n
     ./ci.sh
+    # insert initial data
+    ./insert_data.sh
     cd ../homepage
    ./ci.sh
+   }
     ```
-7. Deploy the projects
+6. Deploy the projects
     ```shell
+    {
     cd ../homepage-cluster-config
     ./deploy_applications.sh
+    }
     ```
-8. Visit the homepage
-    Go to `https://homepage-service.homepage.svc.cluster.local/` in your browser, you should see the homepage.
+7. Visit the homepage
+    
+    Go to `http://homepage-service.homepage.svc.cluster.local` in your browser, you should see the homepage.
+    
+    Go to `http://argocd-server.argocd.svc.cluster.local` in your browser, you should see the ArgoCD dashboard, the username is `admin`, the password will be `password`.
+8. Clean up
+    ```shell
+    cd ../homepage-cluster-config
+    ./stop.sh
+    cd ../../
+    rm -rf ./RabbitGather
+    ```

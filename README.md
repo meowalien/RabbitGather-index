@@ -17,7 +17,7 @@ You can find all the projects below:
 - [HomepageAuthorization](https://github.com/meowalien/homepage-authorization) - The authorization service for all
   projects.
 
-## How to run this project locally (MacOS)
+## How to run this project on-premise (MacOS)
 
 1. Install needed tools
 

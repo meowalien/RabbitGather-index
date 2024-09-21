@@ -80,14 +80,17 @@ You can find all the projects below:
     }
     ```
 7. Visit the homepage
+    > If any of the URL below does not work, you may need to wait for a few minutes for the services to be ready.
     
     Go to `http://homepage-service.homepage.svc.cluster.local` in your browser, you should see the homepage.
     
     Go to `http://argocd-server.argocd.svc.cluster.local` in your browser, you should see the ArgoCD dashboard, the username is `admin`, the password will be `password`.
 8. Clean up
     ```shell
+   {
     cd ../homepage-cluster-config
     ./stop.sh
     cd ../../
     rm -rf ./RabbitGather
+    }
     ```
